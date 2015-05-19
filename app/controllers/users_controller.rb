@@ -4,12 +4,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def check
-    puts params[:From]
+    @twilio = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+
     if User.where(phone: params[:From]).blank?
       @user = User.create(phone: params[:From])
+      puts @twilio
       @twilio.messages.create(
         from: "+16504378953",
-        to: @user.phone,
+        to: @users.phone,
         body: 'Welcome to the club'
         )
       render json: @user
