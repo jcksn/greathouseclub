@@ -6,12 +6,13 @@ class UsersController < ApplicationController
   def check
     puts params[:From]
     if User.where(phone: params[:From]).blank?
-      User.create(phone: params[:From])
+      @user = User.create(phone: params[:From])
       @twilio.messages.create(
         from: "+16504378953",
         to: self.phone,
         body: 'Welcome to the club'
         )
+      render json: @user
     end
   end
 
