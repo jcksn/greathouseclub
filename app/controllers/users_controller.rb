@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   # GET /users.json
   def check
     puts params[:From]
-    if User.where(phone: params[:phone]).blank?
-      
+    if User.where(phone: params[:From]).blank?
+      # User.create(phone: params[:From]) 
     end
   end
 
