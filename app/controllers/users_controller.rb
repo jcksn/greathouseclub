@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if User.where(phone: params[:From]).blank?
       User.create(phone: params[:From])
       @twilio.messages.create(
-        from: "(650) 437-8953",
+        from: "+16504378953",
         to: self.phone,
         body: 'Welcome to the club'
         )
