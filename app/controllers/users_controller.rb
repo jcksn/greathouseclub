@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def check
+    puts params
     if User.where(phone: params[:phone]).blank?
       
     end
