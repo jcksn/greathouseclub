@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       @user = User.create(phone: params[:From])
       @twilio.messages.create(
         from: "+16504378953",
-        to: self.phone,
+        to: @user.phone,
         body: 'Welcome to the club'
         )
       render json: @user
