@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :messages
+
   get 'users/check'
   resources :users do
     member do
