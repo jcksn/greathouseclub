@@ -31,6 +31,10 @@ gem 'twilio-ruby'
 gem 'figaro' 
 gem 'twitter-bootstrap-rails'
 
+gem "therubyracer"
+gem "less-rails"
+gem 'simple_form'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
