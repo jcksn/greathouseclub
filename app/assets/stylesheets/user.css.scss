@@ -1,3 +1,38 @@
 // Place all the styles related to the user controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.conversation {
+	margin: 0 3em;
+}
+
+.page-header {
+	text-align: center;
+}
+
+p {
+	margin: 0;
+	font-size: 1.2em;
+}
+
+.message {
+	clear: both;
+	max-width: 50%;
+	position: relative;
+	padding: 15px;
+	margin: 1em 0 1em;
+	color: #000;
+	background: #f3961c;
+	border-radius: 10px;
+	background: linear-gradient(top, #f9d835, #f3961c);
+}
+
+.to {
+	// text-align: right;
+	float: right;
+}
+
+.from {
+	// text-align: left;
+	float: left;
+}

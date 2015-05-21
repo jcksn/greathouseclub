@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1>Conversation with <%= @user.name == "" ?  number_to_phone(@user.phone) : @user.name %></h1>
+</div>
+
+<div class="conversation">
+	<% @messages.each do |message| %>
+		<div class="message <%= message.from == @user.phone ? 'from' : 'to' %>">
+			<p>
+				<%= message.body %>
+			</p>
+		</div>
+	<% end %>
+</div>
+
+<%= simple_form_for @user %>

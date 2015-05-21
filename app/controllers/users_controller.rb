@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :message]
 
   # GET /users
   # GET /users.json
@@ -11,6 +11,16 @@ class UsersController < ApplicationController
       @user.welcome
     end
     render nothing: true 
+  end
+
+  def message
+    @twilio = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+    from_messages = @twilio.account.messages.list(from: @user.phone)
+    to_messages = @twilio.account.messages.list(to: @user.phone)
+
+    @messages = from_messages + to_messages
+    @messages.sort_by!(&:date_sent)
+    puts @user.phone
   end
 
   def index
@@ -79,6 +89,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params[:user]
+      params[:user].permit(:phone, :name)
     end
 end
