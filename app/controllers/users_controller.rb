@@ -13,16 +13,6 @@ class UsersController < ApplicationController
     render nothing: true 
   end
 
-  def message
-    @twilio = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
-    from_messages = @twilio.account.messages.list(from: @user.phone)
-    to_messages = @twilio.account.messages.list(to: @user.phone)
-
-    @messages = from_messages + to_messages
-    @messages.sort_by!(&:date_sent)
-    puts @user.phone
-  end
-
   def index
     @users = User.all
   end

@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  resources :messages
 
   get 'users/check'
   resources :users do
-    member do
-      get "message" 
-    end
+    resources :messages
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
