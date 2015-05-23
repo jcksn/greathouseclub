@@ -1,27 +1,20 @@
-<h1>Listing messages</h1>
+<div class="page-header">
+  <h1>Conversation with <%= @user.name == "" ?  number_to_phone(@user.phone) : @user.name %></h1>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Body</th>
-      <th>To</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="conversation">
+  <% @messages.each do |message| %>
+    <div class="message <%= message.from == @user.phone ? 'from' : 'to' %>">
+      <p>
+        <%= message.body %>
+      </p>
+    </div>
+  <% end %>
+</div>
 
-  <tbody>
-    <% @messages.each do |message| %>
-      <tr>
-        <td><%= message.body %></td>
-        <td><%= message.to %></td>
-        <td><%= link_to 'Show', message %></td>
-        <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Message', new_message_path %>
+<div class="container" id="reply">
+  <%= simple_form_for [@user, @message], html: { class: 'form-horizontal'}, remote: true do |f| %>
+    <%= f.input :body, label: false, as: :string %>
+    <%= f.button :submit, class: "input-group-btn" %>
+  <% end %>
+</div>

@@ -1,10 +1,17 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    from_messages = TWILIO.account.messages.list(from: @user.phone)
+    to_messages = TWILIO.account.messages.list(to: @user.phone)
+
+    @messages = from_messages + to_messages
+    @messages.sort_by! { |m| DateTime.parse(m.date_sent) }
+    @messages.each { |e| puts e.date_sent }
+    @message = Message.new
   end
 
   # GET /messages/1
@@ -24,17 +31,11 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
-
-    respond_to do |format|
-      if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @message }
-      else
-        format.html { render :new }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
-    end
+    @message = TWILIO.messages.create(
+      from: "+16504378953",
+      to: @user.phone,
+      body: message_params["body"]
+    )
   end
 
   # PATCH/PUT /messages/1
@@ -65,10 +66,14 @@ class MessagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_message
       @message = Message.find(params[:id])
+    end 
+
+    def set_user
+      @user = User.find(params[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:body, :to)
+      params.require(:message).permit(:body)
     end
 end
