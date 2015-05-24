@@ -1,3 +1,51 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+p {
+	margin: 0;
+	font-size: 1.2em;
+}
+
+.conversation {
+	margin: 0 3em;
+	overflow: auto;
+	margin-bottom: 2em;
+}
+
+.page-header {
+	text-align: center;
+}
+
+.message {
+	clear: both;
+	max-width: 50%;
+	position: relative;
+	padding: 15px;
+	margin: 1em 0 1em;
+	color: #000;
+	background: #f3961c;
+	border-radius: 10px;
+	background: linear-gradient(top, #f9d835, #f3961c);
+}
+
+.to {
+	// text-align: right;
+	float: right;
+}
+
+.from {
+	// text-align: left;
+	float: left;
+}
+
+#reply {
+	// width: 100%; 
+	position: fixed;
+	bottom: 0;
+	margin-bottom: 2em;
+}
+
+.conversation {
+	margin-bottom: 5em;
+}

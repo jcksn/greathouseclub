@@ -12,9 +12,11 @@
   <% end %>
 </div>
 
-<div class="container" id="reply">
-  <%= simple_form_for [@user, @message], html: { class: 'form-horizontal'}, remote: true do |f| %>
-    <%= f.input :body, label: false, as: :string %>
-    <%= f.button :submit, class: "input-group-btn" %>
-  <% end %>
-</div>
+<%= simple_form_for [@user, @message], remote: true do |f| %>
+  <div class="container input-group" id="reply">
+    <%= f.input :body, label: false, as: :string, class: "input" %>
+    <span class="input-group-btn">
+      <%= f.button :submit, "Send" %>
+    </span>
+  </div>
+<% end %>
