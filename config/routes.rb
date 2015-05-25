@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "users#index"
 
   get 'users/check'
   resources :users do
